@@ -1,5 +1,8 @@
 # NewsResearchTool – LLM-Powered News Research Agent (RAG)
 
+![UI](screenshot/news_research_analysis.jpg)
+
+
 An LLM-based research agent that answers user questions by **retrieving, analyzing, and reasoning over multiple news article URLs** using a Retrieval-Augmented Generation (RAG) pipeline.
 
 ---

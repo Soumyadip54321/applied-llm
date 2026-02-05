@@ -1,5 +1,8 @@
 # Fictitious Restaurant Name & Menu Generator (LLM)
 
+![UI](screenshot/fictitious_restaurant_with_menu.jpg)
+
+
 An LLM-powered application that generates **creative restaurant names and sample menus** based on the cuisine type and theme (e.g., Indian, Italian, Japanese, fine-dining, casual, street-style).
 
 ---

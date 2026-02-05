@@ -1,5 +1,8 @@
 # SQL RAG Agent – AtliQ T-Shirts Retail Analytics
 
+![SQL Agent UI](screenshot/atliq_QandA.jpg)
+
+
 An LLM-powered **SQL + Retrieval-Augmented Generation (RAG) agent** that answers natural language questions over a retail database for a fictitious apparel company, **AtliQ T-Shirts**.
 
 The agent translates user questions into optimized SQL queries, executes them safely, and returns **business-friendly answers** grounded in actual database results.
