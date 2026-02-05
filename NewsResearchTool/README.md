@@ -120,9 +120,10 @@ This project demonstrates:
 
 - Source citations in responses
 - Streaming answers
-- Support for PDFs and reports
-- Caching and incremental ingestion
 - Speech to text conversion
+- Avoid LLM hallucinations i.e. even with URLs of news landing page
+  RAG agents give detailed response which actually isn't actual news, hence
+  fetch URLs from landing page and then pass those to RAG.
 
 ---
 

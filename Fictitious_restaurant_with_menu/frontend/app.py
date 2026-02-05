@@ -3,7 +3,7 @@ Script that creates an UI that displays restaurant name and possible menus using
 '''
 
 import streamlit as st
-from Fictitious_restaurant_with_menu.backend.restaurant_and_menu_generator_server import generate_restaurant_and_menu
+from backend.restaurant_and_menu_generator_server import generate_restaurant_and_menu
 
 st.title('Fictitious Restaurant with Menu Generator')
 

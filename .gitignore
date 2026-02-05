@@ -3,5 +3,5 @@ NewsResearchTool/frontend/cache/
 .env
 .venv/
 .idea/
-*.egg-info/
 .DS_Store
+screenshots/
