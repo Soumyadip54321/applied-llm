@@ -1,0 +1,9 @@
+langchain
+streamlit
+protobuf
+mysql-connector-python
+langchain_community
+langchain-openai
+langchain_core
+langchain_classic
+langchain_classic

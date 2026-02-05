@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llms"
+version = "0.1.0"
+description = "LLMs projects including AgenticAI & RAG apps"
+requires-python = ">=3.9"
+
+[tool.setuptools.packages.find]
+where = ["."]   # tells python where to start search from.
+include = ["Fictitious_restaurant_with_menu*","NewsResearchTool*","SQL_agent*"]    # includes all directories starting with AgenticAI and subdirectories underneath as site packages.
