@@ -40,8 +40,10 @@ with st.form(key='question_form',enter_to_submit=False,clear_on_submit=False):
 
     # check if both question and urls are present in which case fetch LLM response
     if question and urls and submitted:
-        response = call_rag_agent(question,tuple(urls))
-        st.write(response)
+        # set empty container to write answer to.
+        placeholder = st.empty()
+        for response in call_rag_agent(question,tuple(urls)):
+            placeholder.write(response)
     elif question and not urls:
         st.write('No valid url provided.Please provide url and try again')
     elif not question and urls:

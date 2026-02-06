@@ -114,8 +114,7 @@ class Output(BaseModel):
 sql_agent = create_agent(
     model=model,
     tools=tools,
-    system_prompt=system_prompt,
-    response_format=ProviderStrategy(Output)
+    system_prompt=system_prompt
 )
 @lru_cache
 def fetch_response(query : str):
@@ -123,10 +122,17 @@ def fetch_response(query : str):
     Function that runs the SQL agent given a user query and returns the answer.
     :return:
     '''
-    result = sql_agent.invoke({"messages":[{"role":"user","content":query}]})
-    return result['structured_response'].answer
+    result = ""
+    for token,metadata in sql_agent.stream({"messages":[{"role":"user","content":query}]},stream_mode="messages"):
+        node = metadata['langgraph_node']
+        content = token.content_blocks
+
+        if node == 'model' and content and content[0].get('text',''):
+            result += content[0]['text']
+            yield result
+
 
 # if __name__ == '__main__':
 #     query = "Suppose we sell all the t-shirts today in our inventory with their respective discounts applied. Display all the revenues that would be generated across brands?"
 #     print(f'{query}')
-#     print(f'{fetch_response(query)}\n')
+#     fetch_response(query)

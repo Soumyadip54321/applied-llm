@@ -15,8 +15,9 @@ with st.form(key='question_form', clear_on_submit=False,enter_to_submit=True):
     question = st.text_input("Ask any question:",value="",placeholder="Please enter a question",help="Enter a question below to get answer.")
     submitted = st.form_submit_button(label="Get answer",type="primary")
 
-    # if there is a question fetch response by running the RAG SQL-Agent in the backend.
+    # if there is a question fetch response and display it in chatbot style by running the RAG SQL-Agent in the backend.
     if question and submitted:
-        result = fetch_response(question)
-        st.write('Answer:',result)
+        placeholder = st.empty()
+        for response in fetch_response(question):
+            placeholder.markdown(response)
 

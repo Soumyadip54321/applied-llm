@@ -104,14 +104,17 @@ def call_rag_agent(query : str, urls):
         model=model,
         tools=[retrieve_tool])
 
-    for event in agent.stream({"messages":[{"role":"user","content":query}]}, stream_mode="values"):
-        output = event['messages'][-1].content
+    for token,metadata in agent.stream({"messages":[{"role":"user","content":query}]}, stream_mode="messages"):
+        node = metadata['langgraph_node']
+        content = token.content_blocks
 
-    # return final result
-    return output
+        if node == 'model' and content and content[0].get('text', ''):
+            # capture progressively increasing response
+            output += content[0]['text']
+            yield output
 
 
-if __name__ == '__main__':
-    url_tuples = tuple('https://www.moneycontrol.com/news/business/tata-motors-mahindra-gain-certificates-for-production-linked-payouts-11281691.html')
-    Query = 'What is production linked payouts?'
-    print(call_rag_agent(Query, url_tuples))
+# if __name__ == '__main__':
+#     url_tuples = tuple('https://www.moneycontrol.com/news/business/tata-motors-mahindra-gain-certificates-for-production-linked-payouts-11281691.html')
+#     Query = 'What is production linked payouts?'
+#     print(call_rag_agent(Query, url_tuples))
