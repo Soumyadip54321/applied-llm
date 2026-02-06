@@ -131,9 +131,9 @@ Natural Language Answer
   - 
       mysql -u your_user -p atliq_tshirts < database/schema.sql
 
-- **Run the application from the frontend directory**
+- **Run the application from the project root**
   - 
-      streamlit run app.py
+      python -m streamlit run app.py
 
 
 
@@ -152,5 +152,5 @@ SQL_agent/
 
 ## 📈 Future Enhancements
 
-- Speech to text conversion
+- Speech to text & text to speech conversions using voice agent
 - Support multi-table joins beyond discounts
