@@ -84,18 +84,42 @@ Answer
 ## 📂 Project Structure
 
 ```text
-NewsResearchTool/
-├── app.py
-├── backend/
-│   ├── cache
-│   ├── tool_based_RAG.py
-├── frontend/
-│   └── app.py
-│   ├── cache
-└── README.md
+Root
+├──NewsResearchTool/
+    ├── app.py
+    ├── backend/
+    │   ├── cache
+    │   ├── tool_based_RAG.py
+    ├── frontend/
+    │   └── app.py
+    │   ├── cache
+    └── README.md
 ```
+---
 
+## ⚙️ Installation & Setup
 
+- **Create and activate virtual environment**
+  - 
+      python -m venv .venv
+      source .venv/bin/activate   # macOS / Linux
+      .venv\Scripts\activate      # Windows
+- **Install Dependencies**
+  - 
+      pip install -r requirements.txt
+- **Configure Environment Variables**
+  -
+  
+      OPENAI_API_KEY=your_llm_api_key
+      DB_USER=your_db_user
+      DB_PASSWORD=your_db_password
+      DB_HOST=localhost
+      DB_PORT=3306
+      DB_NAME=atliq_tshirts
+
+- **Run the application from the project root**
+  - 
+      python -m streamlit run NewsResearchTool/frontend/app.py
 ---
 
 ## 🚀 How It Works (High Level)
