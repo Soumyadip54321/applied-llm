@@ -3,7 +3,7 @@ Script that creates an UI that answers questions basis news articles with the he
 '''
 
 import streamlit as st
-from backend.tool_based_RAG import call_rag_agent, index_documents_to_vector_db
+from NewsResearchTool.backend.tool_based_RAG import call_rag_agent, index_documents_to_vector_db
 
 # set page title
 st.title('News :red[_Research_] Tool')

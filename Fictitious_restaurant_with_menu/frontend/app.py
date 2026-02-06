@@ -3,7 +3,7 @@ Script that creates an UI that displays restaurant name and possible menus using
 '''
 
 import streamlit as st
-from backend.restaurant_and_menu_generator_server import generate_restaurant_and_menu
+from Fictitious_restaurant_with_menu.backend.restaurant_and_menu_generator_server import generate_restaurant_and_menu
 
 st.title('Fictitious Restaurant with Menu Generator')
 
@@ -14,7 +14,6 @@ if cuisine:
     response = generate_restaurant_and_menu(cuisine)
     # display restaurant name
     restaurant = response['restaurant_name']
-    # result = re.findall(pattern=r'\*\*(.*?)\*\*',string=restaurant)
     st.header(restaurant)
     # fetch menu items
     menu_items = response['menu'].split(',')
