@@ -123,10 +123,10 @@ This project demonstrates:
 
 - Source citations in responses
 - Streaming answers
-- Speech to text conversion
+- Speech to text and text to speech conversion using voice agent.
 - Avoid LLM hallucinations i.e. even with URLs of news landing page
-  RAG agents give detailed response which actually isn't actual news, hence
-  fetch URLs from landing page and then pass those to RAG.
+  RAG agents give detailed response which isn't actual news but a generated one using just the headline & a short summary, hence
+  fetch URLs from landing page using web-crawlers and then pass those to RAG.
 
 ---
 
