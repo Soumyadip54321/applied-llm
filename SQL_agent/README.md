@@ -133,7 +133,7 @@ Natural Language Answer
 
 - **Run the application from the project root**
   - 
-      python -m streamlit run app.py
+      python -m streamlit run SQL_agent/frontend/app.py
 
 
 
@@ -142,12 +142,13 @@ Natural Language Answer
 ## 📂 Project Structure
 
 ```text
-SQL_agent/
-├── backend/
-│   └── sql_agent.sql
-├── frontend/
-│   ├── app.py
-└── README.md
+Root
+├──SQL_agent/
+    ├── backend/
+    │   └── sql_agent.sql
+    ├── frontend/
+    │   ├── app.py
+    └── README.md
 ```
 
 ## 📈 Future Enhancements
