@@ -1,4 +1,4 @@
-# 🧠 LLM Projects Monorepo
+# 🧠 APPLIED LLM
 
 This repository is a **monorepo of applied LLM & RAG projects**, focusing on real-world use cases such as SQL reasoning, document retrieval, and structured content generation.
 
