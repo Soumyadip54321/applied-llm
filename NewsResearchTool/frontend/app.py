@@ -4,6 +4,27 @@ Script that creates an UI that answers questions basis news articles with the he
 
 import streamlit as st
 from NewsResearchTool.backend.tool_based_RAG import call_rag_agent, index_documents_to_vector_db
+from NewsResearchTool.backend.STT_using_whisper import transcribe_audio
+
+st.markdown("""
+<style>
+/* Force audio input to match text_input height */
+div[data-testid="stAudioInput"] {
+    height: 42px;
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+
+/* Inner wrapper */
+div[data-testid="stAudioInput"] > div {
+    height: 100%;
+    padding: 0 8px !important;    /* reduce vertical padding */
+    display: flex;
+    align-items: center;
+}
+</style>
+""", unsafe_allow_html=True)
 
 # set page title
 st.title('News :red[_Research_] Tool')
@@ -33,20 +54,36 @@ with st.sidebar:
         if submitted and urls:
             index_documents_to_vector_db(tuple(urls))
 
-with st.form(key='question_form',enter_to_submit=False,clear_on_submit=False):
-    question = st.text_input(label='Question:',value="",placeholder='Enter a question to fetch answer.')
+with st.container(border=True):
+    col1, col2 = st.columns([5,2])
 
-    submitted = st.form_submit_button(label="Get answer",help="Process Question",type="primary")
+    # initialise state
+    if 'text_question' not in st.session_state:
+        st.session_state.text_question = ''
+
+    # setup audio I/P
+    with col2:
+        audio = st.audio_input(label='Audio:',label_visibility='collapsed')
+    # in case audio exists transcribe it to text and place it in question tab.
+    if audio:
+        st.spinner('Processing Audio')
+        st.session_state.text_question = transcribe_audio(audio)
+
+    # setup question input
+    with col1:
+        question = st.text_input(label='Question:',value="",placeholder='Enter a question to get answer for',key='text_question')
+
+    submitted = st.button(label="Get answer",help="Process Question",type="primary")
 
     # check if both question and urls are present in which case fetch LLM response
-    if question and urls and submitted:
+    if st.session_state.text_question and urls and submitted:
         # set empty container to write answer to.
         placeholder = st.empty()
         for response in call_rag_agent(question,tuple(urls)):
             placeholder.write(response)
-    elif question and not urls:
+    elif st.session_state.text_question and not urls:
         st.write('No valid url provided.Please provide url and try again')
-    elif not question and urls:
+    elif not st.session_state.text_question and urls:
         index_documents_to_vector_db(tuple(urls))
 
 
