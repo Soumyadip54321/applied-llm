@@ -42,12 +42,13 @@ This ensures **accurate, explainable, and context-aware responses**.
 - 📝 Question answering over long-form content  
 - 🧠 Reduced hallucination via retrieval grounding  
 - ? Tackling complex questions involving multiple lines.
+-   Converts question recorded as voice input to text 
 
 ---
 
 ## 🏗️ Architecture Overview
 
-User Question
+User Question (either typed or voice recorded)
 →
 News URLs → Content Extraction → Chunking → Cached Embeddings
 →
@@ -90,6 +91,7 @@ Root
     ├── backend/
     │   ├── cache
     │   ├── tool_based_RAG.py
+    |   ├── speech_to_text.py
     ├── frontend/
     │   └── app.py
     │   ├── cache

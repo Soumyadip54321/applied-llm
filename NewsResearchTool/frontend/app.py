@@ -4,7 +4,7 @@ Script that creates an UI that answers questions basis news articles with the he
 
 import streamlit as st
 from NewsResearchTool.backend.tool_based_RAG import call_rag_agent, index_documents_to_vector_db
-from NewsResearchTool.backend.STT_using_whisper import transcribe_audio
+from NewsResearchTool.backend.speech_to_text import transcribe_audio
 
 st.markdown("""
 <style>
