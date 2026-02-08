@@ -34,15 +34,17 @@ This ensures **accurate, explainable, and context-aware responses**.
 
 ---
 
-## 🧠 Key Capabilities
-
-- 🔗 Multi-URL news ingestion  
-- 📚 Retrieval-Augmented Generation (RAG)  
-- 🧩 Cross-article reasoning  
-- 📝 Question answering over long-form content  
-- 🧠 Reduced hallucination via retrieval grounding  
-- ? Tackling complex questions involving multiple lines.
--   Converts question recorded as voice input to text 
+🧠 Key Capabilities
+- 🔗 Multi-URL news ingestion
+- 📚 Retrieval-Augmented Generation (RAG) for grounded responses
+- 🧩 Cross-article reasoning across multiple news sources
+- 📝 Question answering over long-form content
+- 🛡️ Reduced hallucinations via retrieval-based grounding
+- 🧠 Complex question handling spanning multiple narratives
+- 🎙️➡️📝 Voice-to-text question input with automatic transcription
+- 🔁 Fail-safe speech transcription
+     - 🥇 AssemblyAI as the primary STT engine
+     - 🥈 Whisper as a robust fallback
 
 ---
 
@@ -89,7 +91,6 @@ Root
 ├──NewsResearchTool/
     ├── app.py
     ├── backend/
-    │   ├── cache
     │   ├── tool_based_RAG.py
     |   ├── speech_to_text.py
     ├── frontend/
@@ -142,17 +143,15 @@ This project demonstrates:
 - Handling **unstructured data at scale**
 - Designing systems that minimize hallucinations
 - Applying LLMs beyond simple chat use cases
+- Using dual failsafe speech-to-text models to transcribe audio.
 
 ---
 
 ## 📈 Future Enhancements
 
 - Source citations in responses
-- Streaming answers
-- Speech to text and text to speech conversion using voice agent.
-- Avoid LLM hallucinations i.e. even with URLs of news landing page
-  RAG agents give detailed response which isn't actual news but a generated one using just the headline & a short summary, hence
-  fetch URLs from landing page using web-crawlers and then pass those to RAG.
+- Text to speech conversion using voice agent.
+- Mitigae LLM hallucinations with news headings and short description present on news landing pages.
 
 ---
 
