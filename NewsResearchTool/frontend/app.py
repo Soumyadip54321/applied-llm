@@ -66,8 +66,8 @@ with st.container(border=True):
         audio = st.audio_input(label='Audio:',label_visibility='collapsed')
     # in case audio exists transcribe it to text and place it in question tab.
     if audio:
-        st.spinner('Processing Audio')
-        st.session_state.text_question = transcribe_audio(audio)
+        with st.spinner('Processing Audio...'):
+            st.session_state.text_question = transcribe_audio(audio)
 
     # setup question input
     with col1:
