@@ -10,7 +10,6 @@ import whisper
 import tempfile
 from dotenv import load_dotenv
 import assemblyai as aai
-from langchain.agents import create_agent
 
 load_dotenv('.env')
 
@@ -48,28 +47,39 @@ def transcribe_audio(audio)->str:
     # get audio file path
     audio_file_path = save_audio_file(audio)
 
-    # transcribe audio to text using universal-2 model
-    config = aai.TranscriptionConfig(
-        speech_models=["universal-2"]  # or "universal-3-pro"
-    )
+    try:
+        # -----------------------------------------------------ASSEMBLY AI TRANSCRIPTION --------------------------------------------------
+        # transcribe audio to text using universal-2 model
+        config = aai.TranscriptionConfig(
+            speech_models=["universal-2"],
+            language='en' # or "universal-3-pro"
+        )
 
-    # Assembly AI creates a job to transcribe the audio file with status=queued.
-    result = aai.Transcriber(config=config).transcribe(audio_file_path)
+        # Assembly AI creates a job to transcribe the audio file with status=queued by default in background.
+        transcriber = aai.Transcriber(config=config)
+        job = transcriber.transcribe(audio_file_path)
 
-    # since transcription is asynchronous in nature we wait for sometime before fetching the job to check whether it got completed or errored out
-    while result.status not in ["completed", "error"]:
-        # wait 1 sec prior to fetching job
-        time.sleep(1)
-        # fetch updated job which's assumed to contain the converted text from audio & status
-        result = transcriber.get_transcript(result.id)
+        # since transcription is asynchronous in nature we wait for sometime before fetching the job to check whether it got completed or errored out
+        while job.status not in ["completed", "error"]:
+            # wait 1 sec prior to fetching job
+            time.sleep(1)
+            # fetch updated job which's assumed to contain the converted text from audio & status
+            job = transcriber.get_transcript(job.id)
 
-    # if job errored out use whisper model to transcribe audio.
-    if result.status == "error":
+        # if job errored out use whisper model to transcribe audio.
+        if job.status == "completed":
+            result = job.text.strip()
+
+        return result
+    except Exception as e:
+
+        # ----------------------------------------------- WHISPER FALLBACK -------------------------------------------------------------
         whisper_model = load_whisper_model()
-        result = whisper_model.transcribe(audio_file_path,language="en")
+        job = whisper_model.transcribe(audio_file_path,language="en",fp16=False,temperature=0.0,condition_on_previous_text=False)
+        result = job['text'].strip()
 
-    # clean-up the temp audio file stored in disc
-    os.remove(audio_file_path)
-
-    return result.text.strip()
+        return result
+    finally:
+        # clean up the temp audio file stored in disc
+        os.remove(audio_file_path)
 
