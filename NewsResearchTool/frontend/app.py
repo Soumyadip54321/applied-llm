@@ -5,6 +5,8 @@ Script that creates an UI that answers questions basis news articles with the he
 import streamlit as st
 from NewsResearchTool.backend.tool_based_RAG import call_rag_agent, index_documents_to_vector_db
 from NewsResearchTool.backend.speech_to_text import transcribe_audio
+from NewsResearchTool.backend.text_to_speech import text_to_speech
+import asyncio
 
 st.markdown("""
 <style>
@@ -64,10 +66,10 @@ with st.container(border=True):
     # setup audio I/P
     with col2:
         audio = st.audio_input(label='Audio:',label_visibility='collapsed')
-    # in case audio exists transcribe it to text and place it in question tab.
-    if audio:
-        with st.spinner('Processing Audio...'):
-            st.session_state.text_question = transcribe_audio(audio)
+        # in case audio exists transcribe it to text and place it in question tab.
+        if audio:
+            with st.spinner('Processing Audio...'):
+                st.session_state.text_question = transcribe_audio(audio)
 
     # setup question input
     with col1:
@@ -79,8 +81,14 @@ with st.container(border=True):
     if st.session_state.text_question and urls and submitted:
         # set empty container to write answer to.
         placeholder = st.empty()
+        full_response = ""
         for response in call_rag_agent(question,tuple(urls)):
             placeholder.write(response)
+            full_response = response
+
+        # convert response to audio
+        asyncio.run(text_to_speech(full_response))
+
     elif st.session_state.text_question and not urls:
         st.write('No valid url provided.Please provide url and try again')
     elif not st.session_state.text_question and urls:
