@@ -102,7 +102,11 @@ def call_rag_agent(query : str, urls):
     # setup RAG agent
     agent = create_agent(
         model=model,
-        tools=[retrieve_tool])
+        tools=[retrieve_tool],
+        system_prompt="""
+        You are a news research agent that displays response as per user query.
+        Please SHOW response source such as the news article URL the response is gathered from at the end as well.
+        """)
 
     for token,metadata in agent.stream({"messages":[{"role":"user","content":query}]}, stream_mode="messages"):
         node = metadata['langgraph_node']
@@ -112,9 +116,3 @@ def call_rag_agent(query : str, urls):
             # capture progressively increasing response
             output += content[0]['text']
             yield output
-
-
-# if __name__ == '__main__':
-#     url_tuples = tuple('https://www.moneycontrol.com/news/business/tata-motors-mahindra-gain-certificates-for-production-linked-payouts-11281691.html')
-#     Query = 'What is production linked payouts?'
-#     print(call_rag_agent(Query, url_tuples))
