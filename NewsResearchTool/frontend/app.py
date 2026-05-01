@@ -90,8 +90,9 @@ with st.container(border=True):
             placeholder.write(response)
             full_response = response
 
-        # convert response to audio
-        asyncio.run(text_to_speech(full_response))
+        # convert response to audio bytes
+        audio_bytes = asyncio.run(text_to_speech(full_response))
+        st.audio(audio_bytes, format="audio/mp3")
 
     elif st.session_state.text_question and not urls:
         st.write('No valid url provided.Please provide url and try again')
