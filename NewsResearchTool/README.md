@@ -146,9 +146,8 @@ This project demonstrates:
 
 ## 📈 Future Enhancements
 
-- Source citations in responses
-- Text to speech conversion using voice agent.
-- Mitigae LLM hallucinations with news headings and short description present on news landing pages.
+- Mitigate LLM hallucinations with news headings and short description present on news landing pages.
+- Use OCR to scan newspapers and answer user queriesh as `What's on sports today?`, `What about politics?` etc.
 
 ---
 
