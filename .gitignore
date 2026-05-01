@@ -1,0 +1,10 @@
+NewsResearchTool/backend/cache/
+NewsResearchTool/frontend/cache/
+.env
+.venv/
+.idea/
+.DS_Store
+cache/
+NewsResearchTool/backend/__pycache__/*
+NewsResearchTool/__pycache__/
+SQL_agent/backend/__pycache__/
