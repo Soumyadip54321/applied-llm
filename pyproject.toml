@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "NewsResearchTool"
+version = "0.1.0"
+description = "News research tool with RAG, speech-to-text and text-to-speech"
+authors = [
+{ name = "Soumyadip Sikdar" }
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["NewsResearchTool*"]
+exclude = ["cache*", "*.egg-info*"]
