@@ -13,3 +13,4 @@ whisper>=1.1.10
 streamlit>=1.53.1
 unstructured>=0.18.32
 openai-whisper>=20250625
+-e .
