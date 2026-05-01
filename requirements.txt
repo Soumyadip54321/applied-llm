@@ -8,7 +8,6 @@ langchain_openai>=1.2.1
 langchain_text_splitters>=1.1.2
 openai>=2.33.0
 python-dotenv>=1.2.2
-sounddevice>=0.5.5
 whisper>=1.1.10
 streamlit>=1.53.1
 unstructured>=0.18.32
